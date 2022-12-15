@@ -193,4 +193,199 @@ BDD$domotique <- fct_recode(BDD$domotique,
                                    "Sans opinion"="7")
 
 #h. reseaux sociaux----
+BDD$rzsocio <- as.factor(BDD$i6_14)
+BDD$rzsocio <- fct_recode(BDD$rzsocio,
+                                 "indispensable"="1",
+                                 "changer bcp de choses mais peut sen passer"="2",
+                                 "pas changer grd chose"="3",
+                                 "NSP de quoi il sagit"="4",
+                                 "Non concernee"="5",
+                                 "Ne saurais dire"="6",
+                                 "Sans opinion"="7")
 
+#i. les smartphones----
+
+BDD$smartphone <- as.factor(BDD$i6_19)
+BDD$smartphone <- fct_recode(BDD$smartphone,
+                                    "indispensable"="1",
+                                    "changer bcp de choses mais peut sen passer"="2",
+                                    "pas changer grd chose"="3",
+                                    "NSP de quoi il sagit"="4",
+                                    "Non concernee"="5",
+                                    "Ne saurais dire"="6",
+                                    "Sans opinion"="7")
+
+#j.  le cloud ----
+
+BDD$cloud <- as.factor(BDD$i6_20)
+BDD$cloud <- fct_recode(BDD$cloud,
+                               "indispensable"="1",
+                               "changer bcp de choses mais peut sen passer"="2",
+                               "pas changer grd chose"="3",
+                               "NSP de quoi il sagit"="4",
+                               "Non concernee"="5",
+                               "Ne saurais dire"="6",
+                               "Sans opinion"="7")
+#k. le streaming----
+
+BDD$streaming <- as.factor(BDD$i6_21)
+BDD$streaming <- fct_recode(BDD$streaming,
+                                   "indispensable"="1",
+                                   "changer bcp de choses mais peut sen passer"="2",
+                                   "pas changer grd chose"="3",
+                                   "NSP de quoi il sagit"="4",
+                                   "Non concernee"="5",
+                                   "Ne saurais dire"="6",
+                                   "Sans opinion"="7")
+
+#l. musique en ligne ----
+
+BDD$musiconline <- as.factor(BDD$i6_22)
+BDD$musiconline <- fct_recode(BDD$musiconline,
+                                     "indispensable"="1",
+                                     "changer bcp de choses mais peut sen passer"="2",
+                                     "pas changer grd chose"="3",
+                                     "NSP de quoi il sagit"="4",
+                                     "Non concernee"="5",
+                                     "Ne saurais dire"="6",
+                                     "Sans opinion"="7")
+
+#3.2. Jugement technologies numerique ----
+
+BDD$jugetechnum <- as.factor(BDD$i8)
+BDD$jugetechnum <- fct_recode(BDD$jugetechnum,
+                                     "il faut aller plus loin"="1",
+                                     "on est alle trop loin"="2",
+                                     "choses sont bien tel qu'aujourdhui"="3",
+                                     "Sans opinion"="4")
+
+#3.3. Sentiment monde numerique ----
+
+BDD$sentimtechnum <- as.factor(BDD$i9)
+BDD$sentimtechnum <- fct_recode(BDD$sentimtechnum,
+                                       "evolution monde num comme opportunite"="1",
+                                       "craignent evolution du monde num"="2",
+                                       "NSP sil faut craindre ou non evolution monde num"="3",
+                                       "Sans opinion"="4")
+
+#3.4. Apport numerique homme et societe ----
+
+BDD$apportnumsoc <- as.factor(BDD$i11a)
+BDD$apportnumsoc <- fct_recode(BDD$apportnumsoc,
+                                      "Plus de bien que de mal"="1",
+                                      "Plus de mal que de bien"="2",
+                                      "A peu pres autant de bien que de mal"="3",
+                                      "Sans opinion"="4")
+
+#3.5. Apport numerique a soi ----
+
+BDD$apportnumsoi <- as.factor(BDD$i11b)
+BDD$apportnumsoi <- fct_recode(BDD$apportnumsoi,
+                                      "Plus de bien que de mal"="1",
+                                      "Plus de mal que de bien"="2",
+                                      "A peu pres autant de bien que de mal"="3",
+                                      "Sans opinion"="4")
+
+#3.6. Infos vie pv et donnees internet  ----
+
+BDD$infoVPD <- as.factor(BDD$i13_3)
+BDD$infoVPD <- fct_recode(BDD$infoVPD,
+                                 "Oui tout a fait"="1",
+                                 "Oui plutot"="2",
+                                 "Non plutot pas"="3",
+                                 "Non pas du tout"="4",
+                                 "Sans opinion"="5")
+
+#recodage car lecture opaque pdt analyses bivariées
+
+BDD$infoVPD <-fct_collapse(BDD$infoVPD,
+                                         "En faveur" = c("Oui tout a fait","Oui plutot"),
+                                         "En défaveur"=c("Non plutot pas","Non pas du tout"),
+                                         NULL="Sans opinion")
+
+
+#3.7. Sentiment usage perso numerique ----
+
+BDD$Sentimpersonum <- as.factor(BDD$i24c)
+BDD$Sentimpersonum <- fct_recode(BDD$Sentimpersonum,
+                                        "tout a fait a laise"="1",
+                                        "plutot a laise"="2",
+                                        "plutot mal a laise "="3",
+                                        "tout a fait mal a laise"="4",
+                                        "Sans opinion"="5")
+
+#recodage car lecture opaque pdt analyses bivariées
+
+BDD$Sentimpersonum <-fct_collapse(BDD$Sentimpersonum,
+                                         "A laise" = c("tout a fait a laise","plutot a laise"),
+                                         "Pas à laise"=c("plutot mal a laise ","tout a fait mal a laise"),
+                                         NULL="Sans opinion")
+
+
+#3.8. Sexe ----
+
+BDD$rs1 <- as.factor(BDD$rs1)
+BDD$sexe <- fct_recode(BDD$rs1,
+                              "homme"="1",
+                              "femme"="2")
+
+#3.9. Age ---- 
+
+BDD$age <- as.factor(BDD$age)
+BDD$age <- fct_recode(BDD$age,
+                             "14 a 24ans"="1",
+                             "25 a 34ans"="2",
+                             "35 a 49ans"="3",
+                             "50 a 64ans"="4",
+                             "65ans et plus"="5")
+#3.10. CSP ----
+
+BDD$CSP <- as.factor(BDD$pcsip)
+BDD$CSP <- fct_recode(BDD$CSP,
+                             "agriculteur"="1",
+                             "commercant, artisant, chef dentreprise"="2",
+                             "cadre et profession intellectuelle"="3",
+                             "profession intermediaire"="4",
+                             "employe"="5",
+                             "ouvrier"="6",
+                             "inactif et retraite"="7")
+
+#CSP agriculteur passée en NULL car il n'y a que 4 répondants en valeur absolue
+#donc on ne peut pas faire de pourcentage avec une base aussi faible en terme de 
+#valeur statistique.
+
+BDD$CSP <- fct_recode(BDD$CSP,
+                             "commercant, artisant, chef dentreprise"="1",
+                             "cadre et profession intellectuelle"="2",
+                             "profession intermediaire"="3",
+                             "employe"="4",
+                             "ouvrier"="5",
+                             "inactif et retraite"="6",
+                              NULL="agriculteur")
+
+
+#3.11. Nb de pers foyer ----
+
+BDD$persfoyer <- as.factor(BDD$rs102)
+BDD$persfoyer <- fct_recode(BDD$persfoyer,
+                                   "Une"="1",
+                                   "Deux"="2",
+                                   "Trois"="3",
+                                   "Quatre"="4",
+                                   "Cinq et plus"="5")
+#3.12. Revenus ----
+
+BDD$revenu <- as.factor(BDD$rs182)
+BDD$revenu <- fct_recode(BDD$revenu,
+                                "Moins de 1000 euros"="1",
+                                "De 1000 a 1500 euros"="2",
+                                "De 1500 a 1900 euros"="3",
+                                "De 1900 a 2300 euros"="4",
+                                "De 2300 a 2700 euros"="5",
+                                "De 2700 a 3100 euros"="6",
+                                "De 3100 a 3700 euros"="7", 
+                                "De 3700 a 4400 euros"="8",
+                                "De 4400 a 5800 euros"="9",
+                                "De 5800 euros et plus"="10",
+                                "Ne veut pas dire"="11",
+                                "Sans opinion"="12")
