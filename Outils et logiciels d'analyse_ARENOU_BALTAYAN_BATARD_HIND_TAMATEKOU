@@ -389,3 +389,204 @@ BDD$revenu <- fct_recode(BDD$revenu,
                                 "De 5800 euros et plus"="10",
                                 "Ne veut pas dire"="11",
                                 "Sans opinion"="12")
+#3.13. Niveau etudes ----
+
+BDD$diplome <- as.factor(BDD$rs15)
+BDD$diplome <- fct_recode(BDD$diplome,
+                                 "Enseignement primaire"="1",
+                                 "Enseignement secondaire"="2",
+                                 "Technique court"="3",
+                                 "Seconde, 1ere, terminale, niveau bac ou brevet professionnels"="4",
+                                 "Technique supérieur"="5",
+                                 "Bac+1 ou Bac+2"="6",
+                                 "Bac+3 ou Bac+4"="7", 
+                                 "Bac+5 ou plus"="8",
+                                 "Nest jamais alle a lecole"="9",
+                                 "Ne veut pas dire"="10",
+                                 "Sans opinion"="11")
+
+#3.14. Niveau agglo ----
+
+BDD$agglo <- as.factor(BDD$habp)
+BDD$agglo <- fct_recode(BDD$agglo,
+                               "Moins de 2000 habitants"="1",
+                               "2 000 a 20 000 habitants"="2",
+                               "20 000 a 100 000 habitants"="3",
+                               "Plus de 100 000 habitants"="4",
+                               "Agglommeration parisienne"="5")
+
+#3.15. Aire urbaine ----
+
+BDD$aire <- as.factor(BDD$aire)
+BDD$aire <- fct_recode(BDD$aire,
+                              "Pole urbain"="1",
+                              "Commune perirubaine"="2",
+                              "Espace rural sous inf urbaine"="3",
+                              "Rural isole"="4")
+
+#SECTION 2 - Recodage pour lecture statistique
+
+BDD$i6_1<-as.factor(BDD$i6_1)
+BDD$i6_2<-as.factor(BDD$i6_2)
+
+
+BDD$i6_5<-as.factor(BDD$i6_5)
+
+BDD$i6_6<-as.factor(BDD$i6_6)
+BDD$i6_8<-as.factor(BDD$i6_8)
+BDD$i6_9<-as.factor(BDD$i6_9)
+BDD$i6_11<-as.factor(BDD$i6_11)
+BDD$i6_14<-as.factor(BDD$i6_14)
+BDD$i6_19<-as.factor(BDD$i6_19)
+BDD$i6_20<-as.factor(BDD$i6_20)
+BDD$i6_21<-as.factor(BDD$i6_21)
+BDD$i6_22<-as.factor(BDD$i6_22)
+
+BDD$i8<-as.factor(BDD$i8)
+
+BDD$i9<-as.factor(BDD$i9)
+BDD$i11a<-as.factor(BDD$i11a)
+BDD$i11b<-as.factor(BDD$i11b)
+
+
+BDD$i13_3<-as.factor(BDD$i13_3)
+BDD$i24c<-as.factor(BDD$i24c)
+
+```
+
+# I. État des inventions du numérique.
+
+Afin d'établir une étude rigoureuse et pertinente, nous avons choisi d'étudier un ensemble de variables issu d'une enquête sur les rapports des Français au numérique.
+On peut déceler un ensemble de 3 grands groupes de variables.
+Tout d'abord on s'intéressera ici à deux groupes de variables à expliquer, et puis à un ensemble de variables explicatives.
+
+Dans un premier temps, on s'intéressera à l'utilité de certaines technologies numériques dans la vie quotidienne des Français , et puis dans un second temps, l'on s'intéressera à un ensemble de positionnements des Français vis-à-vis du numérique.
+Enfin, les variables explicatives comme l'âge, le sexe, la position sociale viendront tenter d'apporter des explications approfondies, utiles à la réflexion autour de la stratégie marketing à adopter.
+
+Avant de commencer, nous allons exposer un graphique de corrélation des variables, nous permettant de voir la pertinence des variables à étudier.
+
+##### Figure 1 - Graphique de corrélation des variables.
+
+```{r cercle-correlation, include=FALSE}
+
+info <- read_excel("C:/Users/Utilisateur/Downloads/info.xls")
+res.pca <- PCA(info, graph = FALSE)
+print(res.pca)
+
+```
+
+```{r echo=TRUE}
+fviz_pca_var(res.pca, col.var = "black")
+```
+
+Le cercle des corrélations, permets de voir quelles sont les variables les plus corrélées entre elles, et également les moins bien corrélées.
+
+Ainsi, plus les variables se superposent, plus elles sont corrélées entre elles.
+A l'inverse, plus les variables sont éloignées les unes des autres, moins elles sont corrélées.
+Par ailleurs, plus les variables s'écartent de l'origine (i.e. le centre du schéma), plus les variables sont bien représentées par la méthode du cercle des corrélations.
+
+Dit autrement, plus les angles dessinés par les flèches entre deux variables sont petits, plus les variables sont corrélées entre elles, et inversement.
+Par exemple, les variables i9 (sentiment vis-à-vis du monde numérique) et 11b (apport du numérique à soi) situées dans le 4ème quadrant, sont très fortement corrélées.
+
+Dans le cas du présent graphique, il est particulièrement important de souligner que les différentes inventions et leurs utilités sont fortement corrélées les unes avec les autres.
+Cependant, le cercle de corrélation ne permet pas de faire l'économie d'une analyse plus approfondie étant donné qu'il fait apparaître uniquement les corrélations, et non les causalités entre les variables.
+De ce fait, cela signifie que le cercle de corrélation permet d'établir des hypothèses de réflexion qu'il faudra vérifier par la suite.
+
+Nous concernant, on peut établir l'hypothèse que les différentes inventions et leurs utilités sont corrélées dans la mesure où plus un individu est compétent avec une des technologies numérique, plus il aura de chance de l'être concernant les autres technologies numériques (et inversement).
+
+Enfin pour mieux saisir la représentation des variables qu'à l'oeil nu, nous proposons de restituer un graphique témoignant de la qualité de la représentation des variables.
+
+##### Figure 2 - Qualité de la représentation des variables par rapport au cercle de corrélation.
+
+```{r}
+fviz_cos2(res.pca, choice = "var", axes = 1:2)
+```
+
+Plus la valeur du cosinus carré des variables est proche de 1, plus la variable elle est représentative.
+Ainsi on peut déduire ici que les variables i6_2 (utilité d'internet) ; i6_22 (utilité de la musique en ligne) ; i6_19 (utilité du smartphone) ; i6_5 (utilité de la photographie numérique) sont les variables les plus représentatives dans l'ensemble des variables sélectionnées.
+
+À présent, nous étudierons l’ensemble des variables sélectionnées afin de les analyser.
+Nous débuterons par l'utilité du téléphone mobile dans la vie quotidienne des Français.
+
+##### Figure 3 - Histogramme utilité téléphone mobile
+
+```{r}
+barplot(table(i6_1), col= "red")
+```
+
+**Légende:** 1.
+Elle est devenue indispensable ; 2.Elle a changé beaucoup de choses mais vous pourriez vous en passer ; 3.Elle n'a pas changé grand-chose ; 4.Vous ne savez pas de quoi il s'agit ; 5.Non concerné (Vous n'en avez pas ou n'en utilisez pas) ; 6.Vous ne sauriez pas dire ; 7.Sans opinion
+
+Concernant l'invention du téléphone mobile, on peut voir que la majeure partie de la population française l'estime comme indispensable dans leur vie quotidienne.
+
+##### Figure 4 - Tableau utilité téléphone mobile
+
+```{r}
+figure4 <- freq(BDD$telmob) 
+kable(figure4)
+```
+
+Le téléphone mobile a envahi notre quotidien et apparaît incontestablement comme un moyen de communication surreprésenté dans nos sociétés individualistes (Martin, 2003).
+La présente enquête révèle les enjeux d'une telle innovation puisque 66,1% des répondants estiment que l'invention du téléphone portable est indispensable dans la vie quotidienne, et 23,5% considèrent que le téléphone portable a changé beaucoup de choses mais qu'ils peuvent s'en passer.
+
+Pour pousser l'analyse, nous souhaitons voir si l'âge et la catégorie sociale ont un impact sur la manière dont appréciée le téléphone mobile dans la vie quotidienne des français.
+
+##### Figure 5 - Histogramme empilé de l'appréciation de l'utilité du téléphone mobile selon l'âge
+
+```{r}
+ggplot(BDD) + geom_bar(aes(x = age, fill = telmob))
+```
+
+Après modélisation graphique, on peut voir que l'indispensabilité du téléphone mobile varie en fonction de l'âge des Français.
+Pour étudier ces écarts, nous souhaitons exposer dans un tableau l'appréciation de l'utilité du téléphone mobile selon l'âge.
+
+##### Figure 6 - Tableau utilité du téléphone mobile selon l'âge
+
+```{r include=FALSE}
+table(BDD$age, BDD$telmob)
+age_telmob <- table(BDD$age, BDD$telmob)
+figure6 <- lprop(age_telmob)
+```
+
+```{r}
+kable(figure6, digits = 1)
+```
+
+Concernant l'utilité du téléphone mobile, il semblerait que l'âge soit le facteur le plus clivant.
+Si la majorité de la population estime qu'il est indispensable au quotidien, ce sont les plus jeunes qui sont surreprésentés dans cette catégorie.
+Il se joue alors un important effet de génération qui sépare les plus de 65 ans du reste de la population : 86,5% des 14-24 ans déclarent que le téléphone mobile est indispensable dans leur vie quotidienne contre 49,8% des personnes âgées de 65 ans et plus.
+
+##### Figure 7 - Tableau utilité du téléphone mobile selon la CSP
+
+```{r include=FALSE}
+table(BDD$CSP, BDD$telmob)
+CSP_telmob <- table(BDD$CSP, BDD$telmob)
+figure7 <- lprop(CSP_telmob)
+```
+
+```{r}
+kable(figure7, digits = 1)
+```
+
+Le niveau de diplôme est également une variable explicative fondamentale en ce qui concerne l'utilité du téléphone mobile.
+Ce dernier semble plus indispensable aux individus les plus diplômés puisque 71,4% des individus détenteurs d'un bac+5 ou plus déclarent que le téléphone mobile est indispensable contre 38,9% pour ceux qui ont un niveau égal à l'enseignement primaire.
+Si une dimension purement matérielle peut expliquer ce résultat (plus on est diplômés plus notre pouvoir d'achat est élevé), c'est avant tout une question de disposition à l'usage du numérique qui est en jeu (Lahire in Granjon, 2022).
+La logique dispositionnelle mise en avant par Fabien Granjon permet de montrer que l'usage plus général des NTIC et son appréciation dépendent étroitement de "ressources socio-culturelles inégalement distribuées dans l'espace social" (Granjon, 2022).
+
+##### Figure 8 - Histogramme utilité internet
+
+```{r}
+barplot(table(i6_2), col = "blue")
+```
+
+**Légende:**
+
+1.Elle est devenue indispensable ; 2.
+Elle a changé beaucoup de choses mais vous pourriez vous en passer ; 3.
+Elle n'a pas changé grand-chose ; 4.
+Vous ne savez pas de quoi il s'agit ; 5.
+Non concerné (Vous n'en avez pas ou n'en utilisez pas) ; 6.
+Vous ne sauriez pas dire ; 7.
+Sans opinion
+
+On peut d'ailleurs établir le même constat par rapport à l'invention d'internet, puisque depuis l'histogramme, on peut déceler avec un simple coup d'oeil que les Français l'estiment également comme indispensable dans leur vie quotidienne.
