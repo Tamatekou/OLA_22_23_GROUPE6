@@ -590,3 +590,200 @@ Vous ne sauriez pas dire ; 7.
 Sans opinion
 
 On peut d'ailleurs établir le même constat par rapport à l'invention d'internet, puisque depuis l'histogramme, on peut déceler avec un simple coup d'oeil que les Français l'estiment également comme indispensable dans leur vie quotidienne.
+
+
+##### Figure 9 - Tableau utilité internet
+
+```{r}
+figure9 <- freq(BDD$internet)
+kable(figure9)
+```
+
+Internet est une innovation indispensable pour 65.4% des répondants, seulement 10.9% des répondants ne s'estiment pas concernés.
+Dominique Cardon parle alors de massification pour illustrer cette augmentation et cette diversification des utilisateurs depuis l'invention d'internet (Cardon in Beuscart et al., 2019).
+Cependant "massification" ne veut pas dire démocratisation, nous verrons dans la suite du développement que nous ne sommes pas toutes et tous égaux et égales face à l'utilité de cette nouvelle technologie dans notre quotidien (Beuscart et al., 2019).
+
+##### Figure 10 - Mosaïque de l'appréciation de l'invention d'internet selon l'âge
+
+```{r}
+mosaicplot(table(BDD$i6_2, BDD$age), col=1:10, main=NULL, cex.axis = 0.8)
+```
+
+**Légende des ordonnées:** : 1.Elle est devenue indispensable ; 2.
+Elle a changé beaucoup de choses mais vous pourriez vous en passer ; 3.
+Elle n'a pas changé grand-chose ; 4.
+Vous ne savez pas de quoi il s'agit ; 5.
+Non concerné (Vous n'en avez pas ou n'en utilisez pas) ; 6.
+Vous ne sauriez pas dire ; 7.
+Sans opinion
+
+A partir d'une modélisation graphique, l'on peut s'apercevoir qu'en France, l'ensemble des catégories d'âges estime que l'invention d'internet est devenue indispensable dans leur vie quotidienne.Cependant, plus les individus sont âgés, moins ils estiment que cette invention comme indispensable dans leur vie quotidienne.
+On peut également observer un fort taux de déclaration de la modalité de réponse "Non concernée" chez les personnes âgées de 65ans et plus.
+
+Pour approfondir l'analyse, nous proposons une lecture chiffrée en pourcentage.
+
+##### Figure 11 - Tableau estimant le degré d'utilité d'internet des français selon l'âge.
+
+```{r include=FALSE}
+table(BDD$age, BDD$internet)
+age_internet <- table(BDD$age, BDD$internet)
+figure11 <- lprop(age_internet)
+```
+
+```{r}
+kable(figure11, digits = 1)
+```
+
+Concernant l'utilité d'internet, celle-ci s'explique une nouvelle fois à partir de l'âge.
+En effet, on note une différence significative quant à l'utilité d'internet dans la vie quotidienne selon l'âge, presque 9 personnes sur 10 (89,5%) âgées entre 14 et 24 ans estiment qu'internet est indispensable dans leur vie quotidienne, contre 61,6% pour les personnes âgées de 50 à 64 ans et seulement 34,4% chez les 65 ans et plus.
+En ce sens, la part de personnes qui estiment que cela n'a pas changé chose corrèle également avec l'âge.
+Sur l'ensemble des personnes interrogées, 3,2% déclarent que cela n'a pas changé, ce qui représente 5,3% des personnes âgées de 65 ans et plus.
+Autrement dit, plus on est âgé, moins internet est utile au quotidien.
+On peut expliquer ce clivage par un effet de génération puisque les plus âgés sont nés à une époque où tous les outils numériques que nous connaissons aujourd'hui n'existaient pas.
+Ils ont donc appris "à faire sans" (Collos & Delomier, 2012).
+Cependant ils demeurent 34.4% des 65 ans et plus à considérer l'usage d'internet comme indispensable au quotidien puisqu'internet est un remarquable outil de communication qui permet à certaines personnes âgées et souvent malades de maintenir un lien avec le monde social (amis, famille, actualité, divertissement...).
+
+##### Figure 12 - Tableau estimant le degré d'utilité d'internet des français selon la CSP
+
+```{r include=FALSE}
+table(BDD$CSP, BDD$internet)
+CSP_internet <- table(BDD$CSP, BDD$internet)
+figure12 <- lprop(CSP_internet)
+```
+
+```{r}
+kable(figure12, digits = 1)
+```
+
+Ce second point qui concerne les catégories socio-professionnelles conforte l'idée énoncée plus haut selon laquelle l'âge est un facteur explicatif de l'utilité d'internet dans la vie quotidienne puisque ce sont les inactifs et les retraités qui déclarent une moindre importance d'internet dans leur quotidien.
+Alors que 86.4% des professions intermédiaires estiment qu'internet est indispensable, seulement 54.6% des retraités et inactifs semblent concernés par cette affirmation.
+Si les explications à cet usage différentiel d'internet sont nombreuses, c'est avant tout les conséquences de la distance à cet outil qui sont significatives.
+Ce que les sociologues nomment "la fracture numérique" qui oppose ceux qui ont accès à internet et ceux qui n'y ont pas accès, conduit à l'isolement des populations les moins connectées (les retraités, les ouvriers et les employés) qui ont alors moins accès à certains réseaux de sociabilité, aux démarches administratives en ligne, à l'information en temps réel, etc. (Beuscart et al., 2019).
+
+##### Figure 13 - Histogramme utilité photonumérique
+
+```{r}
+barplot(table(i6_5), col = "green") 
+```
+
+**Légende:**
+
+1.  Elle est devenue indispensable ; 2. Elle a changé beaucoup de choses mais vous pourriez vous en passer ; 3. Elle n'a pas changé grand-chose ; 4. Vous ne savez pas de quoi il s'agit ; 5. Non concerné (Vous n'en avez pas ou n'en utilisez pas) ; 6. Vous ne sauriez pas dire ; 7. Sans opinion
+
+L'appréciation de l'invention de la photo numérique est partagée entre les Français qui estiment cette invention comme indispensable, et les Français qui considèrent qu'elle a changé beaucoup de chose, mais qu'elle n'est pas devenue indispensable.
+
+##### Figure 14 - Tableau utilité photographie numérique
+
+```{r}
+figure14 <- freq(BDD$photonum)
+kable(figure14)
+```
+
+Les innovations successives en matière de photographie (i.e. un matériel de plus en plus compact, de plus en plus simple d'utilisation, une définition sans cesse améliorée de l'image et finalement une connexion permanente à l'Internet par l'entremise du smartphone) ont conduit à transformer ces pratiques culturelles en pratiques hégémoniques.
+Globalement, tout un chacun possède désormais les appareils numériques nécessaires pour réaliser de simples photos.
+Il s'agit d'ailleurs d'une innovation assez largement reconnue par les individus puisque 43% des répondants estiment que la photographie numérique est indispensable dans leur vie quotidienne, 35,8% estiment que cela changé beaucoup de choses mais qu'ils peuvent s'en passer, 8,5% estiment que cela n'a pas changé grand choses et 10,4% des répondants ne s'estiment pas concernés.
+
+##### Figure 15 - Histogramme utilité du GPS
+
+```{r}
+barplot(table(i6_6), col = "pink") 
+```
+
+**Légende:**
+
+1.  Elle est devenue indispensable ; 2. Elle a changé beaucoup de choses mais vous pourriez vous en passer ; 3. Elle n'a pas changé grand-chose ; 4. Vous ne savez pas de quoi il s'agit ; 5. Non concerné (Vous n'en avez pas ou n'en utilisez pas) ; 6. Vous ne sauriez pas dire ; 7. Sans opinion
+
+L'histogramme fait apparaître une légère tendance des Français à estimer l'invention du GPS comme une invention qui a changé beaucoup de choses mais qui n'est pas indispensable dans la vie quotidienne.
+
+##### Figure 16 - Tableau utilité du GPS
+
+```{r}
+figure16 <- freq(BDD$GPS)
+kable(figure16)
+```
+
+Dans un contexte de développement massif du numérique, d'autres innovations ont vu le jour pour faciliter la vie quotidienne des individus, c'est notamment le cas du GPS (Global Positioning System).
+À pied, en voiture, en vélo, le GPS apparaît incontestablement comme un nouvel outil pour se déplacer dans de nouveaux espaces.
+Les individus lui confèrent d'ailleurs une place importante puisque 34,6% des répondants estiment qu'il est indispensable dans la vie quotidienne, 35,8% estiment que l'invention a changé beaucoup de choses mais qu'ils peuvent s'en passer, 10,2% estiment que cela n'a pas changé grand chose et 16,9% ne s'estiment pas concerné par l'innovation.
+Toutefois son utilisation n'est pas homogène et reste plus largement mobilisée par certains groupes de la population.
+
+Nous essayerons d'expliquer cela plus précisément à partir de traitement graphique et tableau selon le sexe des individus.
+
+##### Figure 17 - Proportion de l'appréciation de l'invention du GPS selon le sexe
+
+```{r}
+mosaicplot(table(BDD$i6_6, BDD$sexe), col=1:10, main=NULL, cex.axis = 0.8)
+```
+
+A partir du graphique, l'on peut constater un effet de sexe sur l'appréciation de l'utilité du GPS.
+En effet, les hommes semblent légérement plus enclin à estimer que le GPS comme indispensable, contrairement aux femmes qui estiment davantage que cela a changé beaucoup de choses, mais n'estiment pas le GPS comme indispensable.
+
+Pour avoir une lecture plus précise, il convient de regarder ces valeurs dans un tableau.
+
+##### Figure 18 - Tableau utilité du GPS selon le sexe
+
+```{r include=FALSE}
+table(BDD$sexe, BDD$GPS)
+sexe_GPS <- table(BDD$sexe, BDD$GPS)
+figure18 <- lprop(sexe_GPS)
+```
+
+```{r}
+kable(figure18, digits = 1)
+```
+
+Le sexe des individus apparaît par exemple comme une variable explicative de l'utilité du GPS dans la vie quotidienne.
+Les hommes estiment plus que les femmes que l'invention du GPS est importante dans leur vie quotidienne : 38,3% d'entre eux l'estiment indispensable contre 30% pour les femmes et, à l'inverse 11,2% des femmes estiment que l'invention du GPS n'a pas changé grand chose, contre 9% pour les hommes.
+À partir de ces résultats, il est tout à fait possible de faire l'hypothèse que cette différence dans l'appréciation du GPS dans la vie quotidienne entre les hommes et les femmes serait en partie due aux différences propres aux mobilités selon le genre.
+Des travaux ont montré que pendant longtemps l'usage de la voiture était un mode de déplacement plus largement réservé aux hommes (Blum in Demoli, 2014) de ce fait l'usage du GPS - attaché de nombreuses fois aux déplacements en voiture - se limiterait également à ces derniers.
+Aussi, que les trajets effectués par les femmes sont plus réguliers (lieux professionnels-domicile, etc.) et ne nécessitent pas le GPS (Demoli, 2014).
+Finalement, si le GPS apparaît comme un outil pour "ne plus se perdre" et remet ainsi en cause la vulnérabilité qu'un individu entretient avec l'inconnu, certaines contraintes sociales tel que les rapports sociaux de sexe peuvent expliquer des différences dans l'usage du GPS.
+
+# II. Positionnement vis-à-vis du numérique.
+
+##### Figure 19 - Histogramme apport du numérique à l'homme et à la société
+
+```{r}
+barplot(table(BDD$apportnumsoc), col = "green") 
+```
+
+L'histogramme fait apparaître ici un rapport ambivalent des français au numérique.
+En effet, une majeure partie de la population pense davantage que le numérique a apporté autant de bien que de mal à la société.
+
+##### Figure 20 - Tableau apport du numérique à l'homme et à la société
+
+```{r}
+figure20 <- freq(BDD$apportnumsoc)
+kable(figure20)
+```
+
+La représentation que les individus se font du numérique est intéressante puisqu'elle nous informe sur le rapport de la société au progrès technique.
+L'invention, puis la massification des différents outils numériques ont été accueillies par la population avec beaucoup de craintes.
+Il n'est pas rare, dans les discours du sens commun largement relayés par les médias, d'assister à des polémiques sur le rapport des jeunes à la lecture depuis l'arrivée d'internet, sur l'addiction aux jeux vidéos, aux téléphones portables, etc.
+Bien que la méfiance perdure, les représentations du numérique tendent à une convergence plus positive au fil du temps (Pascau, 2022).
+D'après notre enquête 32.8% des individus estiment que l'innovation numérique a apporté plus de bien que de mal à l'homme et à la société, tandis que seulement 15.3% estiment que ça a apporté plus de mal que de bien.
+La majorité des répondants (47.2%) reste mitigée et estime que les apports négatifs et positifs sont équivalents.
+
+##### Figure 21 - Histogramme empilée de l'apport du numérique à l'homme et à la société selon l'âge.
+
+```{r}
+ggplot(BDD) + geom_bar(aes(x = age, fill = apportnumsoc))
+```
+
+Ici, l'on peut aisément observer que l'apport du numérique à la société est estimé différemment en fonction des différentes catégories d'âges.
+
+```{r include=FALSE}
+table(BDD$age, BDD$apportnumsoc)
+age_apportnumsoc <- table(BDD$age, BDD$apportnumsoc)
+figure21 <- lprop(age_apportnumsoc)
+```
+
+```{r}
+kable(figure21, digits = 1)
+```
+
+L'effet de génération semble être le plus explicatif puisque 43.7% des individus de 14 à 24 ans estiment que le numérique a apporté plus de bien que de mal à l'homme et à la société, alors qu'ils sont 30.2% chez les 65 ans et plus.
+Si la méfiance vis à vis du numérique est partagée, elle est plus importante chez les plus âgés.
+Ceci s'explique par le sentiment de distance qu'ils ressentent face à ces innovations qui sont apparues très rapidement dans la société et qu'ils ne maîtrisent pas encore pleinement (Collos & Delomier, 2012).
+En effet l'usage numérique nécessite des compétences spcéficiques qui sont le fruit d'une socialisation à ces outils.
+
