@@ -787,3 +787,194 @@ Si la méfiance vis à vis du numérique est partagée, elle est plus importante
 Ceci s'explique par le sentiment de distance qu'ils ressentent face à ces innovations qui sont apparues très rapidement dans la société et qu'ils ne maîtrisent pas encore pleinement (Collos & Delomier, 2012).
 En effet l'usage numérique nécessite des compétences spcéficiques qui sont le fruit d'une socialisation à ces outils.
 
+##### Figure 22 - Histogramme s'informer davantage sur protection de la vie privée et des données sur internet
+
+```{r}
+barplot(table(BDD$infoVPD), col = "yellow") 
+```
+
+L'on peut ici voir qu'une majeure partie de la population est favorable pour s'informer davantage sur protection de la vie privée et des données sur internet.
+
+##### Figure 23 - Tableau s'informer davantage sur protection de la vie privée et des données sur internet
+
+```{r}
+figure23 <- freq(BDD$infoVPD) 
+kable(figure23)
+```
+
+La question de la vie privée et de la protection des données personnelles est un enjeu politique important dans nos sociétés où le développement des nouvelles technologies de l'information et de la communication inquiète la population.
+De nombreux scandales autour de la vente de données personnelles par des géants d'internet alimentent la polémique(Journet, 2011) .
+Notre enquête montre qu'environ 70% des répondants souhaiteraient être mieux renseignés sur la protection de la vie privée et des données sur internet alors que seulement 30% y sont défavorables.
+Le partage d'informations personnelles sur internet pose la question de la fin de la vie privée (Boenisch, 2011).
+
+##### Figure 24 - Proportion d'individus souhaitant s'informer davantage sur protection de la vie privée et des données sur internet selon l'âge.
+
+```{r}
+mosaicplot(table(BDD$infoVPD, BDD$age), col=1:10, main=NULL, cex.axis = 0.8)
+```
+
+On peut lire ici qu'une majeure partie de la population souhaite s'informer davantage sur protection de la vie privée et des données sur internet.
+
+##### Figure 25 - Tableau des individus souhaitant s'informer davantage sur protection de la vie privée et des données sur internet selon l'âge.
+
+```{r include=FALSE}
+table(BDD$age, BDD$infoVPD)
+age_infoVPD <- table(BDD$age, BDD$infoVPD)
+figure25 <- lprop(age_infoVPD)
+```
+
+```{r}
+kable(figure25, digits = 1)
+```
+
+Les jeunes semblent plus préoccupés par cette question des données personnelles.
+Chez les 25-34 ans ils sont 80% à être favorables à un meilleur renseignement sur la protection de la vie privée et des données sur internet, contre seulement 47% chez les plus de 65 ans.
+On aurait pu imaginer que les plus âgés seraient plus méfiants, mais ce chiffre semble plutôt traduire une distance aux pratiques de « dévoilement de soi » sur les réseaux sociaux (Gautier, 2013). C'est cette distance qui explique cette forme de désintéressement.
+L'usage des réseaux sociaux concerne en effet majoritairement les jeunes de 18 à 25 ans qui apprécient partager certains éléments de leur vie privée.
+
+##### Figure 26 - Histogramme sentiment par rapport aux usages personnels des technologies numériques
+
+```{r}
+barplot(table(BDD$Sentimpersonum), col = "navy blue") 
+ 
+```
+
+Une majeure partie de la population française semble davantage à l'aise avec leur usage personnel des technologies numériques.
+
+##### Figure 27 - Tableau sentiment concernant les usages personnels des technologies numériques
+
+```{r}
+figure27 <- freq(BDD$Sentimpersonum)
+kable(figure27)
+```
+
+Les différents graphiques exposés ont démontré qu'il existait des disparités d'usages et d'appréciation des outils numériques, ces différences s'illustrent également lorsque l'on interroge les individus sur l'aisance qu'ils ressentent vis-à-vis de ces usages numériques : 62,7% des répondants à l'enquête expriment qu'ils se sentent à l'aise par rapport à leurs usages personnels des technologies numériques et 37,3% ne se sentent pas à l'aise.
+
+##### Figure 28 - Histogramme empilé des sentiments concernant les usages des technologies numériques selon l'âge.
+
+```{r}
+ggplot(BDD) + geom_bar(aes(x = age, fill = Sentimpersonum))
+```
+
+Sur l'histogramme on peut clairement interpréter que l'aisance concernant l'usage personnel des technologies numériques est relatif à l'âge.
+Plus les individus sont jeunes, plus ils se sentent à l'aise.
+Inversement, plus les individus sont âgés, moins ils se sentent à l'aise.
+
+##### Figure 29 - Tableau du sentiment des usages personnels des technologies numériques selon l'âge.
+
+```{r table28, include=FALSE}
+table(BDD$age, BDD$Sentimpersonum)
+age_Sentimpersonum <- table(BDD$age, BDD$Sentimpersonum)
+figure29 <- lprop(age_Sentimpersonum)
+```
+
+```{r}
+kable(figure29, digits = 1)
+```
+
+De nouveau, l'âge tient un rôle central pour expliquer ces différences dans l'aisance à utiliser les outils numériques et s'illustre de nouveau la "fracture numérique" (Granjon, 2022) qui cible particulièrement les personnes les plus âgées.
+En effet, plus les individus sont jeunes, plus ils déclarent se sentir à l'aise quant à leur sentiment personnel des usages des technologies numériques : 90,4% des 14-24 se disent à l'aise contre 31,6% des 65 ans et plus.
+À l'inverse, plus les individus sont âgés, plus ils déclarent se sentir mal à l'aise : 62,5% des 65 ans et plus, contre 7,9% des 14-24 ans.
+À partir des travaux sur la compétence numérique (Brotcorne & Valenduc, 2009), on peut également faire l'hypothèse que ces inégalités numériques persistent dans la mesure où les personnes plus âgées ne sont pas, ou le sont moins, amenées à utiliser les nouvelles technologies que les personnes plus jeunes.
+Dit autrement, la situation sociale (étudiant, salarié, etc.) et le contexte d'apprentissage et d'innovation des technologies numériques favoriseraient l'acquisition de compétences numériques.
+
+# III. Conclusions et prescriptions du rapport
+
+A la suite d'un travail analytique approfondi autour de l'enquête de l'INRIA portant sur les usages et représentations du numérique dans la vie quotidienne des Français, nous sommes arrivés à des conclusions qui nous semblent particulièrement intéressantes pour l'entreprise TelecomX.
+Elles permettront à l'entreprise de mieux connaître les besoins et les attentes de potentiels clients mais également d'orienter ses campagnes de communication autour de groupes ciblés.
+Le public-cible de ce genre d'outils et de services numériques semble plutôt jeune, masculin et diplômé.
+En effet, les inégalités numériques illustrent les inégalités sociales plus larges.
+En reprenant l'exemple de certains usages numériques comme le GPS, on remarque que les pratiques sont genrées et socialement situées.
+Les personnes âgées sont également plus distantes et méfiantes vis-à-vis des innovations numériques (internet, téléphone mobile, protection des données, etc.) en raison d'une socialisation différenciée aux NTIC.
+Cette distance au numérique se retrouve également chez les classes populaires les moins diplômées qui ne possèdent pas non plus les compétences spécifiques à l'usage du numérique que les plus diplômés ont pu acquérir au cours de leur formation.
+Face à l'avancée grandissante des NTIC, la population française semble assez méfiante quant aux effets de ces dernières sur notre rapport à la lecture, à l'écriture, aux activités manuelles et culturelles, à la protection des données privées, etc.
+Si l'entreprise choisit d'étendre sa population cible aux femmes, aux personnes âgées et aux classes populaires, il serait nécessaire d'inclure ces problématiques et de rendre ses services et ses produits plus simples d'utilisation et de concentrer ses campagnes de communication autour de ces enjeux de lutte contre l'exclusion et la fracture numérique, mais également d'insister sur la sécurité numérique.
+
+# Bibliographie
+
+Beuscart, J.-S., Dagiral, É., & Parasie, S.
+(2019).
+Chapitre 1.
+Une histoire d'internet.
+In Sociologie d'internet: Vol.
+2e éd.
+(p. 23‑44).
+Armand Colin; Cairn.info.
+<https://www.cairn.info/sociologie-d-internet--9782200623753-p-23.htm>
+
+Boenisch, G.
+(2011).
+Jean-Marc Manach, La vie privée, un problème de vieux cons ? 
+: Limoges, Éd.
+Fyp, coll.
+Présence, 2010.
+Questions de communication, 19, 397‑399.
+<https://doi.org/10.4000/questionsdecommunication.2883>
+
+Brotcorne, P., & Valenduc, G.
+(2009).
+Les compétences numériques et les inégalités dans les usages d'internet.
+Comment réduire ces inégalités ?
+Les Cahiers du numérique, 5(1), 45‑68.
+
+Coavoux, S.
+(2019).
+Les jeux vidéo, sociologie d'un loisir de masse.
+La Vie des idées.
+<https://laviedesidees.fr/Les-jeux-video-sociologie-d-un-loisir-de-masse.html>
+
+Collos, J.-P., & Delomier, C.
+(2012).
+Usage et non-usage des objets communicants dans le cadre du maintien à domicile.
+La relation des personnes âgées avec les TIC.
+Gérontologie et société, 35 / 141(2), 41‑55.
+<https://doi.org/10.3917/gs.141.0041>
+
+Conord, S.
+(2007).
+Usages et fonctions de la photographie: Ethnologie française, Vol.
+37(1), 11‑22.
+<https://doi.org/10.3917/ethn.071.0011>
+
+Dagiral, É., & Martin, O.
+(2016).
+6.
+Sur Facebook, les jeunes sont-ils dans un monde à part ?:
+In L'ordinaire d'internet (p. 120‑139).
+Armand Colin.
+<https://doi.org/10.3917/arco.marti.2016.02.0120>
+
+Demoli, Y.
+(2014).
+Les femmes prennent le volant : Diffusion du permis et usage de l'automobile auprès des femmes au cours du xxe siècle.
+Travail, genre et sociétés, n° 32(2), 119‑140.
+<https://doi.org/10.3917/tgs.032.0119>
+
+Gautier, H.
+(2013).
+L'attention au monde : Sociologie des données personnelles à l'ère numérique: E.
+Kessous, Armand Colin, 2013, 316 p.
+Terminal, 113‑114, 212‑214.
+<https://doi.org/10.4000/terminal.303>
+
+Granjon, F.
+(2022).
+Inégalités sociales, dispositions et usages du numérique: Éducation et sociétés, n° 47(1), 81‑97.
+<https://doi.org/10.3917/es.047.0081>
+
+Journet, N.
+(2011).
+La vie privée googlisée: Sciences Humaines, N°222(1), 24‑24.
+<https://doi.org/10.3917/sh.222.0024>
+
+Martin, C.
+(2003).
+Le téléphone portable : Machine à communiquer du secret ou instrument de contrôle social ?
+Communication et langages, 136(1), 92‑105.
+<https://doi.org/10.3406/colan.2003.3209>
+
+Pascau, J.
+(2022).
+Les représentations du numérique dans le cadre de l'éducation aux médias et à l'information (EMI) chez les enseignants.
+
+
