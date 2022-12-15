@@ -1,1 +1,196 @@
+---
+title: "M2_OLA_GROUPE6"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+  pdf_document: default
+date: "2022-12-13"
+editor_options:
+  markdown:
+    wrap: sentence
+---
+
+**Auteurs/autrices : ARENOU Mathilde ; BALTAYAN Rémi ; BATARD Lucie ; SERREIR Hind ; TAMATEKOU Akouvi Merveille**
+
+## Préambule :
+
+**L'ensemble du projet a été conduit sous le langage R.4.2.1**
+
+## 1) Orientation du travail / appropriation des consignes.
+
+Outre les points formels abordés dans les consignes (i.e. Dataviz, langage R imposé), nous avons relevé 3 consignes pédagogiques qui nous ont semblé importante pour conduire le présent projet.
+Les consignes mentionnées sont les suivantes :
+
+-   Le projet doit être construit sur un véritable cas d'espèce.
+-   Au sein de ce projet, la démonstration et la proposition d'une marche à suivre doivent être clairement lisibles.
+-   Le projet doit mettre en lumières les compétences acquises depuis nos cursus respectifs pour les faire valoir auprès de potentiels employeurs en vue de l'obtention d'un stage ou d'un poste salarié.
+
+Nous avons ainsi choisi de travailler sur une base de données intitulée « Les français et le numérique » (2014) qui questionne la place et l'usage des technologies numériques dans la vie quotidienne des français.
+
+À partir de cette base, nous avons imaginé une situation figurative qui nous permettrait de nous approprier les consignes pédagogiques.
+En effet, nous avons fait comme si une offre d'emploi avait été émise par une grande boîte de téléphonie mobile (que nous appellerons ici TelecomX).
+Plus précisément, la compagnie télécom exigerait sur la base d'un projet de programmation, une étude chiffrée sur les rapports des Français au numérique.
+De plus, il est également souhaité par TelecomX de faire quelques propositions argumentée concernant la stratégie publicitaire à déployer en vue de la sortie de leur prochain smartphone.
+Le projet de programmation et les propositions argumentées feraient ainsi office de candidature pour un éventuel poste.
+
+Enfin, pour pousser la figuration à son paroxysme, nous serions un collectif de recherche en SHS qui tenterions de postuler pour intégrer le bureau d'étude de TelecomX.
+En outre, en nous appuyant sur une base de données (ou cas d'espèce) réaliste, en exposant une démarche à suivre au travers de proposition argumentées, et en mettant en valeur nos compétences en programmation et d'analyses sociologiques auprès d'une compagnie, nous avons l'ambition de construire un projet R sur la base des 3 attentes pédagogiques évoquées ci-dessus.
+
+## 2) Présentation et choix de la base de données.
+
+La base sur laquelle nous appuyons notre projet s'intitule « Les Français et le numérique » (2014).
+Il s'agit d'une enquête produite par l'INRIA (i.e. Institut national de recherche en sciences et technologies du numérique) portant sur les usages et représentations du numérique dans la vie quotidienne des Français.
+Cette enquête est la réédition de celle conduite en 2011.
+Elle s'est déroulée du 28 novembre au 2 décembre 2013 et a été réalisée en face à face par le réseau des enquêteurs de TNS Sofres auprès d'un échantillon de 1145 individus âgés de 14ans et plus.
+Par ailleurs, la représentativité de l'échantillon est assurée par la méthode des quotas.
+Enfin, nous avions pu récupérer les données de la présente enquête par l'intermédiaire de la plateforme ouverte des données publiques françaises (URL : <https://www.data.gouv.fr/fr/>).
+
+A l'origine, nous souhaitions mobiliser les résultats de l'enquête « Baromètre du numérique » (2020), car cette base de données était plus récente.
+Cependant, la qualité des données n'était pas compatible avec le bon fonctionnement de R studio, ce qui nous a conduits plusieurs fois à de nombreux plantages logiciels.
+Par conséquent, nous avons fait le choix de cette base de données plus ancienne, car la qualité des données était beaucoup plus conforme à l'usage de R studio.
+
+## 3) Répartition du travail.
+
+Pour procéder à la réalisation de ce travail collectif, nous avons opéré en plusieurs temps.
+Tout d'abord, nous nous sommes retrouvés à plusieurs occasions à la bibliothèque universitaire pour convenir d'une base de données à proposer puis à analyser dans le cadre de ce travail.
+Nous nous sommes arrêtés sur l'enquête "Les français et le numérique".
+
+Suite à cela, nous avons procédé à une répartition stratégique du travail.
+Chacun, individuellement, a procédé à un recodage depuis le logiciel de traitement de données RStudio.
+Cette méthode nous a permis de/contraint à croiser plusieurs façons de recoder.
+D'une part, Merveille et Rémi (étudiante en M1 MIASH, et étudiant en ASC) proposait un code prêt à la constitution d'une Dataviz complète et riche d'autre part, Rémi, Mathilde, Hind et Lucie (étudiant.es en M2 ASC) proposaient d'alimenter ce recodage en fonction d'analyses principalement bivariées pour procéder à l'analyse la plus juste possible.
+
+Autrement dit, Merveille et Rémi se sont principalement concentrés sur la constitution d'une DataViz claire (histogramme, codage, mise au propre du script, etc.) et l Rémi, Mathilde, Hind et Lucie ont proposé à partir de lectures théoriques anciennes et nouvelles des pistes d'analyses et hypothèses pour documenter les résultats obtenus.
+Cette confrontation dans nos méthodes de traitement de données aura également été l'occasion pour l'ensemble des membres du groupe d'enrichir ses connaissances quant aux logiciels d'analyses de données et les analyses sociologiques qui en découlent.
+La répartition du travail à laquelle nous avons procédé nous amène donc à proposer le suivant script qui plus est, alimenté par de nombreuses analyses sociologiques.
+
+Enfin, si cette méthode de travail s'est avérée efficace, c'est parce qu'elle est le fruit de consultations régulières entre tous les membres du groupe.
+En revanche, nous n'avons pas utilisé la plateforme Git car Hind avait des difficultés matérielles.
+Par ailleurs, nous nous sentions plus à l'aise par un transfert "main à main" de nos scripts respectifs.
+
+```{r intro-abc, warning=FALSE, include=FALSE}
+
+# Intro - Chargement des bases et des variables
+
+## 1- Chargement des librairies
+library(readxl)
+library(MASS)
+library(ggplot2)
+library(tidyverse)
+library(haven)
+library(gt)
+library(lubridate)
+library(plotrix)
+library(usethis)
+library(tools)
+library(dplyr)
+library("FactoMineR")
+library("factoextra")
+library(foreign)
+library(questionr)
+library(survey)
+library(R2HTML)
+library("corrplot")
+library(tinytex)
+library(knitr)
+
+## 2- Chargement de la base de donnée
+BDD <- read_excel("C:/Users/Utilisateur/Downloads/info.xls")
+attach(BDD)
+
+## 3- Recodage des variables
+
+# SECTION 1 - Recodage pour lecture sociologique.
+
+#3.1. Utilité des inventions numérique ----
+#a.  telephone mobile----
+
+BDD$telmob <- as.factor(BDD$i6_1)
+BDD$telmob <- fct_recode(BDD$telmob,
+                                "indispensable"="1",
+                                "changer bcp de choses mais peut sen passer"="2",
+                                "pas changer grd chose"="3",
+                                "NSP de quoi il sagit"="4",
+                                "Non concernee"="5",
+                                "Ne saurais dire"="6",
+                                "Sans opinion"="7")
+
+
+#b. internet----
+
+BDD$internet <- as.factor(BDD$i6_2)
+BDD$internet <- fct_recode(BDD$internet,
+                                  "indispensable"="1",
+                                  "changer bcp de choses mais peut sen passer"="2",
+                                  "pas changer grd chose"="3",
+                                  "NSP de quoi il sagit"="4",
+                                  "Non concernee"="5",
+                                  "Ne saurais dire"="6",
+                                  "Sans opinion"="7")
+table(BDD$i6_2)
+#le script indique que la modalite de reponse NSP de quoi il sagit est
+#inexistante pour internet, cela est probablement due au fait que tlm connait
+#internet
+
+#c. photo numerique----
+
+BDD$photonum <- as.factor(BDD$i6_5)
+BDD$photonum <- fct_recode(BDD$photonum,
+                                  "indispensable"="1",
+                                  "changer bcp de choses mais peut sen passer"="2",
+                                  "pas changer grd chose"="3",
+                                  "NSP de quoi il sagit"="4",
+                                  "Non concernee"="5",
+                                  "Ne saurais dire"="6",
+                                  "Sans opinion"="7")
+
+#d. GPS ----
+
+BDD$GPS <- as.factor(BDD$i6_6)
+BDD$GPS <- fct_recode(BDD$GPS,
+                             "indispensable"="1",
+                             "changer bcp de choses mais peut sen passer"="2",
+                             "pas changer grd chose"="3",
+                             "NSP de quoi il sagit"="4",
+                             "Non concernee"="5",
+                             "Ne saurais dire"="6",
+                             "Sans opinion"="7")
+#e. jeux videos----
+
+BDD$JV <- as.factor(BDD$i6_8)
+BDD$JV <- fct_recode(BDD$JV,
+                            "indispensable"="1",
+                            "changer bcp de choses mais peut sen passer"="2",
+                            "pas changer grd chose"="3",
+                            "NSP de quoi il sagit"="4",
+                            "Non concernee"="5",
+                            "Ne saurais dire"="6",
+                            "Sans opinion"="7")
+
+#f. elec voiture ----
+
+BDD$elecvoiture <- as.factor(BDD$i6_9)
+BDD$elecvoiture <- fct_recode(BDD$elecvoiture,
+                                     "indispensable"="1",
+                                     "changer bcp de choses mais peut sen passer"="2",
+                                     "pas changer grd chose"="3",
+                                     "NSP de quoi il sagit"="4",
+                                     "Non concernee"="5",
+                                     "Ne saurais dire"="6",
+                                     "Sans opinion"="7")
+
+#g. domotique ----
+
+BDD$domotique <- as.factor(BDD$i6_11)
+BDD$domotique <- fct_recode(BDD$domotique,
+                                   "indispensable"="1",
+                                   "changer bcp de choses mais peut sen passer"="2",
+                                   "pas changer grd chose"="3",
+                                   "NSP de quoi il sagit"="4",
+                                   "Non concernee"="5",
+                                   "Ne saurais dire"="6",
+                                   "Sans opinion"="7")
+
+#h. reseaux sociaux----
 
