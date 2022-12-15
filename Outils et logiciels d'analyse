@@ -1,0 +1,27 @@
+#Rémi Baltayan - Mathilde Arenou - Hind Serreir - Lucie Batard - Merveille Tamatekou
+#Script R Outils et logiciels d'analyses -----
+
+###I - Charger les librairies ----
+
+library(foreign)
+library(questionr)
+library(survey)
+library(R2HTML)
+library(tidyverse)
+library(FactoMineR)
+library(readxl)
+
+###II - Charger les bases et les variables ----
+
+base<-read_excel("base_fr_num.xlsx")
+base_court <- select(base, c(i6_1),c(i6_2), c(i6_5), c(i6_6), c(i6_8),
+                     c(i6_9), c(i6_11), c(i6_14), c(i6_19), c(i6_20), c(i6_21),
+                     c(i6_22),c(i8), c(i9), c(i11a), c(i11b), c(i13_3), c(i24c), 
+                     c(rs1),c(age), c(pcsip),c(rs102), c(rs182), c(rs15),c(habp),c(aire))
+
+###III - Recodage des variables ----
+
+#III-1. Utilité des inventions numérique ----
+#a.  telephone mobile----
+
+base_court$telmob <- as.factor(base_court$i6_1)
